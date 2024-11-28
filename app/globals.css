@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  [data-radix-popper-content-wrapper] {
+    z-index: 50 !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  /* Ensure body takes the full height and has transition for dark mode */
+  html,
+  body,
+  #__next {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition-property: background-color, color;
+    transition-duration: 300ms;
+  }
+
+  body {
+    background-color: theme("colors.white");
+    color: theme("colors.gray.800");
+  }
+
+  .dark body {
+    background-color: theme("colors.gray.900");
+    color: theme("colors.gray.100");
+  }
+
+  /* Customize scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: theme("colors.gray.300");
+    border-radius: 4px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: theme("colors.gray.700");
+  }
+}
+
+/* sidebar.css */
+.sidebar-styles {
+  /* Removed CSS variables in favor of Tailwind classes */
+}
+
+
