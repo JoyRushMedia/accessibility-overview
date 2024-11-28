@@ -1,5 +1,7 @@
 import { Config } from 'tailwindcss'
 import tailwindAnimate from 'tailwindcss-animate'
+import daisyui from 'daisyui'
+import themes from 'daisyui/src/theming/themes'
 
 const config: Config = {
     darkMode: 'class',
@@ -77,7 +79,25 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [tailwindAnimate],
+  plugins: [tailwindAnimate, daisyui],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...themes["light"],
+          primary: "#4F46E5",
+          secondary: "#6B7280",
+          accent: "#FF7F50",
+        },
+        dark: {
+          ...themes["dark"],
+          primary: "#6366F1",
+          secondary: "#9CA3AF",
+          accent: "#FF7F50",
+        },
+      },
+    ],
+  },
 }
 
 export default config

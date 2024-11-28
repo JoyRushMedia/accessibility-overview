@@ -17,9 +17,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 transition-colors duration-300">
-        <ThemeProvider attribute="class">
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <SearchProvider>
             <SidebarProvider>
               <div className="flex">
