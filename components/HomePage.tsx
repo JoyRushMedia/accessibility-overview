@@ -159,10 +159,12 @@ const AccessibilityDashboard = () => {
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Introduction Section */}
-      <Card className="bg-card">
+      <Card className="bg-base-100">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-foreground">Learn Web Accessibility</CardTitle>
-          <CardDescription className="text-lg text-muted-foreground">
+          <CardTitle className="text-2xl font-bold text-base-content">
+            Learn Web Accessibility
+          </CardTitle>
+          <CardDescription className="text-lg text-base-content/60">
             Understanding and implementing accessibility is crucial for creating inclusive web experiences.
             Start your learning journey here.
           </CardDescription>

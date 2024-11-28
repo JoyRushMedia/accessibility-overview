@@ -81,7 +81,7 @@ const RemediationTimeline = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Clock className="h-6 w-6 text-blue-500" />
+            <Clock className="h-6 w-6 text-primary" />
             Accessibility Remediation Timeline
           </CardTitle>
         </CardHeader>
@@ -91,29 +91,29 @@ const RemediationTimeline = () => {
               <div key={index} className="relative">
                 <div className="flex items-start gap-4">
                   <div className="w-48 flex-shrink-0">
-                    <h3 className="font-bold text-lg text-blue-700">{phase.title}</h3>
-                    <p className="text-sm text-gray-600">{phase.duration}</p>
+                    <h3 className="font-bold text-lg text-primary">{phase.title}</h3>
+                    <p className="text-sm text-base-content/60">{phase.duration}</p>
                   </div>
-                  <div className="flex-grow border rounded-lg p-4 bg-gray-50">
+                  <div className="flex-grow border border-base-300 rounded-lg p-4 bg-base-200">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <h4 className="font-semibold mb-2 text-sm">Key Activities</h4>
+                        <h4 className="font-semibold mb-2 text-sm text-base-content">Key Activities</h4>
                         <ul className="space-y-2">
                           {phase.activities.map((activity, i) => (
                             <li key={i} className="flex items-start gap-2 text-sm">
-                              <AlertCircle className="h-4 w-4 mt-0.5 text-orange-500 flex-shrink-0" />
-                              <span>{activity.task}</span>
+                              <AlertCircle className="h-4 w-4 mt-0.5 text-warning flex-shrink-0" />
+                              <span className="text-base-content/70">{activity.task}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-2 text-sm">Deliverables</h4>
+                        <h4 className="font-semibold mb-2 text-sm text-base-content">Deliverables</h4>
                         <ul className="space-y-2">
                           {phase.deliverables.map((deliverable, i) => (
                             <li key={i} className="flex items-start gap-2 text-sm">
-                              <CheckCircle2 className="h-4 w-4 mt-0.5 text-green-500 flex-shrink-0" />
-                              <span>{deliverable}</span>
+                              <CheckCircle2 className="h-4 w-4 mt-0.5 text-success flex-shrink-0" />
+                              <span className="text-base-content/70">{deliverable}</span>
                             </li>
                           ))}
                         </ul>
@@ -122,7 +122,7 @@ const RemediationTimeline = () => {
                   </div>
                 </div>
                 {index < phases.length - 1 && (
-                  <div className="absolute left-24 -bottom-6 text-gray-400">
+                  <div className="absolute left-24 -bottom-6 text-base-content/40">
                     <ArrowRight className="h-4 w-4 rotate-90" />
                   </div>
                 )}
@@ -138,22 +138,22 @@ const RemediationTimeline = () => {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="p-4 border rounded-lg">
-              <h3 className="font-bold mb-3">Critical Intersections</h3>
+            <div className="p-4 border border-base-300 rounded-lg">
+              <h3 className="font-bold mb-3 text-base-content">Critical Intersections</h3>
               <ul className="space-y-2">
-                <li className="text-sm">• UX Design ↔ Development: Interaction patterns</li>
-                <li className="text-sm">• Visual Design ↔ Development: CSS implementation</li>
-                <li className="text-sm">• Content ↔ Development: ARIA labels & descriptions</li>
-                <li className="text-sm">• Testing ↔ All Roles: Validation cycles</li>
+                <li className="text-sm text-base-content/70">• UX Design ↔ Development: Interaction patterns</li>
+                <li className="text-sm text-base-content/70">• Visual Design ↔ Development: CSS implementation</li>
+                <li className="text-sm text-base-content/70">• Content ↔ Development: ARIA labels & descriptions</li>
+                <li className="text-sm text-base-content/70">• Testing ↔ All Roles: Validation cycles</li>
               </ul>
             </div>
-            <div className="p-4 border rounded-lg">
-              <h3 className="font-bold mb-3">Common Bottlenecks</h3>
+            <div className="p-4 border border-base-300 rounded-lg">
+              <h3 className="font-bold mb-3 text-base-content">Common Bottlenecks</h3>
               <ul className="space-y-2">
-                <li className="text-sm">• Design changes requiring development rework</li>
-                <li className="text-sm">• Content updates affecting layout</li>
-                <li className="text-sm">• Testing revealing cross-role issues</li>
-                <li className="text-sm">• Final validation requiring multiple role inputs</li>
+                <li className="text-sm text-base-content/70">• Design changes requiring development rework</li>
+                <li className="text-sm text-base-content/70">• Content updates affecting layout</li>
+                <li className="text-sm text-base-content/70">• Testing revealing cross-role issues</li>
+                <li className="text-sm text-base-content/70">• Final validation requiring multiple role inputs</li>
               </ul>
             </div>
           </div>

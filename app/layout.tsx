@@ -1,7 +1,6 @@
 import React from 'react'
 import './globals.css'
 import type { Metadata } from 'next'
-import { SearchProvider } from './contexts/SearchContext'
 import { SidebarProvider } from '../components/ui/sidebar'
 import { AppSidebar } from '../components/AppSidebar'
 import { ThemeProvider } from 'next-themes'
@@ -18,23 +17,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 transition-colors duration-300">
+      <body>
         <ThemeProvider 
-          attribute="class" 
-          defaultTheme="system"
+          attribute="data-theme"
+          defaultTheme="light"
           enableSystem
-          disableTransitionOnChange
         >
-          <SearchProvider>
+          <div className="min-h-screen bg-base-100 text-base-content">
             <SidebarProvider>
               <div className="flex">
                 <AppSidebar />
-                <main className="flex-1 p-6">
+                <main className="flex-1 bg-base-100">
                   {children}
                 </main>
               </div>
             </SidebarProvider>
-          </SearchProvider>
+          </div>
         </ThemeProvider>
       </body>
     </html>

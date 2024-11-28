@@ -3,7 +3,7 @@ import { RemediationTimeline, ImplementationTimeline, ResourceRequirements, Visu
 
 export default function ImplementationPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-base-100">
       <main className="container mx-auto p-4 pt-20">
         <VisualizationWrapper visualizationId="implementation-timeline">
           <div className="space-y-8">

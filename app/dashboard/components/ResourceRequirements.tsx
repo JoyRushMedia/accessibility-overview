@@ -269,53 +269,53 @@ const ResourceRequirements = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Users className="h-6 w-6 text-blue-500" />
+            <Users className="h-6 w-6 text-primary" />
             Staffing Requirements
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
             {staffingNeeds.map((staff, index) => (
-              <div key={index} className="border rounded-lg p-4">
+              <div key={index} className="border border-base-300 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <h3 className="font-bold">{staff.role}</h3>
-                    <p className="text-sm text-gray-600">{staff.level} • {staff.count} FTE</p>
+                    <h3 className="font-bold text-base-content">{staff.role}</h3>
+                    <p className="text-sm text-base-content/60">{staff.level} • {staff.count} FTE</p>
                   </div>
                 </div>
                 <div className="space-y-4">
                   {/* Responsibilities */}
                   <div>
-                    <h4 className="font-semibold text-sm mb-2">Responsibilities:</h4>
+                    <h4 className="font-semibold text-sm mb-2 text-base-content">Responsibilities:</h4>
                     <ul className="space-y-1">
                       {staff.responsibilities.map((resp, i) => (
                         <li key={i} className="text-sm flex items-start gap-2">
-                          <CheckCircle2 className="h-4 w-4 mt-0.5 text-green-500 flex-shrink-0" />
-                          {resp}
+                          <CheckCircle2 className="h-4 w-4 mt-0.5 text-success flex-shrink-0" />
+                          <span className="text-base-content/70">{resp}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   {/* Required Skills */}
                   <div>
-                    <h4 className="font-semibold text-sm mb-2">Required Skills:</h4>
+                    <h4 className="font-semibold text-sm mb-2 text-base-content">Required Skills:</h4>
                     <ul className="space-y-1">
                       {staff.requiredSkills.map((skill, i) => (
                         <li key={i} className="text-sm flex items-start gap-2">
-                          <Brain className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
-                          {skill}
+                          <Brain className="h-4 w-4 mt-0.5 text-primary flex-shrink-0" />
+                          <span className="text-base-content/70">{skill}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   {/* Certifications */}
                   <div>
-                    <h4 className="font-semibold text-sm mb-2">Certifications:</h4>
+                    <h4 className="font-semibold text-sm mb-2 text-base-content">Certifications:</h4>
                     <ul className="space-y-1">
                       {staff.certifications.map((cert, i) => (
                         <li key={i} className="text-sm flex items-start gap-2">
-                          <Award className="h-4 w-4 mt-0.5 text-orange-500 flex-shrink-0" />
-                          {cert}
+                          <Award className="h-4 w-4 mt-0.5 text-warning flex-shrink-0" />
+                          <span className="text-base-content/70">{cert}</span>
                         </li>
                       ))}
                     </ul>
@@ -331,14 +331,14 @@ const ResourceRequirements = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Brain className="h-6 w-6 text-green-500" />
+            <Brain className="h-6 w-6 text-primary" />
             Tool Requirements
           </CardTitle>
         </CardHeader>
         <CardContent>
           {toolRequirements.map((toolCategory, index) => (
             <div key={index} className="mb-4">
-              <h3 className="font-semibold text-md mb-2">{toolCategory.category}</h3>
+              <h3 className="font-semibold text-md mb-2 text-base-content">{toolCategory.category}</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <h4 className="font-medium">Essential:</h4>

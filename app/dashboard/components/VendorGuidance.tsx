@@ -196,103 +196,21 @@ const VendorGuidance: React.FC<VendorGuidanceProps> = ({ searchQuery = '' }) => 
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Scale className="h-6 w-6 text-blue-500" />
-            Contract Requirements
-          </CardTitle>
+          <CardTitle className="text-base-content">Vendor Evaluation Criteria</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
-            {filteredContractConsiderations.map((phase, index) => (
-              <div key={index} className="border rounded-lg p-4">
-                <h3 className="font-bold text-lg mb-4">{phase.phase}</h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {phase.items.map((item, i) => (
-                    <div key={i} className="bg-gray-50 rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Shield className="h-5 w-5 text-blue-500" />
-                        <h4 className="font-semibold">{item.requirement}</h4>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">{item.details}</p>
-                      <div>
-                        <h5 className="text-sm font-semibold mb-2">Verification:</h5>
-                        <ul className="space-y-1">
-                          {item.verificationSteps.map((step, j) => (
-                            <li key={j} className="text-sm flex items-start gap-2">
-                              <CheckCircle2 className="h-4 w-4 mt-0.5 text-green-500 flex-shrink-0" />
-                              {step}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+          <div className="grid gap-4">
+            {filteredContractConsiderations.map((item) => (
+              <div key={item.phase} className="border border-base-300 rounded-lg p-4 bg-base-100">
+                <h3 className="font-semibold text-base-content mb-2">{item.phase}</h3>
+                <p className="text-base-content/70">{item.items.map(item => item.requirement).join(', ')}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {item.items.map((item) => (
+                    <span key={item.requirement} className="badge badge-outline text-base-content">
+                      {item.requirement}
+                    </span>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <AlertTriangle className="h-6 w-6 text-orange-500" />
-            Vendor Red Flags
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
-            {filteredRedFlags.map((flag, index) => (
-              <div key={index} className="border rounded-lg p-4">
-                <h3 className="font-bold mb-3">{flag.category}</h3>
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="text-sm font-semibold mb-2">Warning Signs:</h4>
-                    <ul className="space-y-1">
-                      {flag.warnings.map((warning, i) => (
-                        <li key={i} className="text-sm flex items-start gap-2">
-                          <AlertCircle className="h-4 w-4 mt-0.5 text-red-500 flex-shrink-0" />
-                          {warning}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold mb-1">Impact:</h4>
-                    <p className="text-sm text-gray-600">{flag.impact}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold mb-1">Mitigation:</h4>
-                    <p className="text-sm text-gray-600">{flag.mitigation}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <CheckCircle2 className="h-6 w-6 text-green-500" />
-            Best Practices
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {filteredBestPractices.map((section, index) => (
-              <div key={index} className="border rounded-lg p-4">
-                <h3 className="font-bold mb-3">{section.title}</h3>
-                <ul className="space-y-2">
-                  {section.practices.map((practice, i) => (
-                    <li key={i} className="text-sm flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 mt-0.5 text-green-500 flex-shrink-0" />
-                      {practice}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>

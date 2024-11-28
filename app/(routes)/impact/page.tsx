@@ -5,7 +5,7 @@ import { BusinessImpact, VisualizationWrapper } from '@/app/dashboard/components
 
 export default function ImpactPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-base-100">
       <main className="container mx-auto p-4 pt-20">
         <VisualizationWrapper visualizationId="stakeholder-roi">
           <BusinessImpact />

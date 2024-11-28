@@ -102,65 +102,55 @@ const ImplementationTimeline = () => {
     }
   ];
 
-  const getPhaseColor = (phase: string) => {
-    switch (phase) {
-      case "Initial Assessment": return "border-blue-200 bg-blue-50";
-      case "Planning & Design": return "border-purple-200 bg-purple-50";
-      case "Implementation": return "border-green-200 bg-green-50";
-      case "Validation": return "border-orange-200 bg-orange-50";
-      default: return "border-gray-200 bg-gray-50";
-    }
-  };
-
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Clock className="h-6 w-6 text-blue-500" />
+            <Clock className="h-6 w-6 text-primary" />
             Implementation Timeline
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
             {phases.map((phase, phaseIndex) => (
-              <div key={phaseIndex} className={`border-2 rounded-lg p-4 ${getPhaseColor(phase.phase)}`}>
+              <div key={phaseIndex} className={`border-2 rounded-lg p-4 border-base-300 bg-base-200`}>
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="font-bold text-lg">{phase.phase}</h3>
-                    <p className="text-sm text-gray-600">Duration: {phase.duration}</p>
+                    <h3 className="font-bold text-lg text-base-content">{phase.phase}</h3>
+                    <p className="text-sm text-base-content/60">Duration: {phase.duration}</p>
                   </div>
                   {phaseIndex < phases.length - 1 && (
-                    <ArrowRight className="h-6 w-6 text-gray-400" />
+                    <ArrowRight className="h-6 w-6 text-base-content/40" />
                   )}
                 </div>
                 <div className="grid md:grid-cols-3 gap-4">
                   {phase.activities.map((activity, actIndex) => (
-                    <div key={actIndex} className="border rounded-lg p-3 bg-white">
+                    <div key={actIndex} className="border border-base-300 rounded-lg p-3 bg-base-100">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold">{activity.name}</h4>
-                        <span className="text-xs text-gray-500">{activity.owner}</span>
+                        <h4 className="font-semibold text-base-content">{activity.name}</h4>
+                        <span className="text-xs text-base-content/60">{activity.owner}</span>
                       </div>
                       <div className="space-y-2">
                         <div>
-                          <h5 className="text-xs font-semibold mb-1">Deliverables:</h5>
+                          <h5 className="text-xs font-semibold mb-1 text-base-content">Deliverables:</h5>
                           <ul className="space-y-1">
                             {activity.deliverables.map((del, i) => (
                               <li key={i} className="text-xs flex items-start gap-1">
-                                <CheckCircle2 className="h-3 w-3 mt-0.5 text-green-500 flex-shrink-0" />
-                                {del}
+                                <CheckCircle2 className="h-3 w-3 mt-0.5 text-success flex-shrink-0" />
+                                <span className="text-base-content/70">{del}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                         {activity.dependencies.length > 0 && (
                           <div>
-                            <h5 className="text-xs font-semibold mb-1">Dependencies:</h5>
+                            <h5 className="text-xs font-semibold mb-1 text-base-content">Dependencies:</h5>
                             <ul className="space-y-1">
                               {activity.dependencies.map((dep, i) => (
                                 <li key={i} className="text-xs flex items-start gap-1">
-                                  <AlertCircle className="h-3 w-3 mt-0.5 text-orange-500 flex-shrink-0" />
-                                  {dep}
+                                  <AlertCircle className="h-3 w-3 mt-0.5 text-warning flex-shrink-0" />
+                                  <span className="text-base-content/70">{dep}</span>
                                 </li>
                               ))}
                             </ul>
@@ -182,45 +172,45 @@ const ImplementationTimeline = () => {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="border rounded-lg p-4">
-              <h3 className="font-bold mb-3">Team Allocation</h3>
+            <div className="border border-base-300 rounded-lg p-4">
+              <h3 className="font-bold mb-3 text-base-content">Team Allocation</h3>
               <ul className="space-y-2">
                 <li className="flex items-center justify-between">
-                  <span className="text-sm">Accessibility Specialists</span>
-                  <span className="text-sm font-medium">40-60 hours/week</span>
+                  <span className="text-sm text-base-content">Accessibility Specialists</span>
+                  <span className="text-sm font-medium text-base-content">40-60 hours/week</span>
                 </li>
                 <li className="flex items-center justify-between">
-                  <span className="text-sm">Developers</span>
-                  <span className="text-sm font-medium">80-120 hours/week</span>
+                  <span className="text-sm text-base-content">Developers</span>
+                  <span className="text-sm font-medium text-base-content">80-120 hours/week</span>
                 </li>
                 <li className="flex items-center justify-between">
-                  <span className="text-sm">Designers</span>
-                  <span className="text-sm font-medium">40-60 hours/week</span>
+                  <span className="text-sm text-base-content">Designers</span>
+                  <span className="text-sm font-medium text-base-content">40-60 hours/week</span>
                 </li>
                 <li className="flex items-center justify-between">
-                  <span className="text-sm">Content Team</span>
-                  <span className="text-sm font-medium">20-40 hours/week</span>
+                  <span className="text-sm text-base-content">Content Team</span>
+                  <span className="text-sm font-medium text-base-content">20-40 hours/week</span>
                 </li>
               </ul>
             </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-bold mb-3">Critical Success Factors</h3>
+            <div className="border border-base-300 rounded-lg p-4">
+              <h3 className="font-bold mb-3 text-base-content">Critical Success Factors</h3>
               <ul className="space-y-2">
                 <li className="text-sm flex items-start gap-2">
-                  <Users className="h-4 w-4 mt-0.5 text-blue-500" />
-                  Dedicated accessibility team
+                  <Users className="h-4 w-4 mt-0.5 text-primary" />
+                  <span className="text-base-content/70">Dedicated accessibility team</span>
                 </li>
                 <li className="text-sm flex items-start gap-2">
-                  <Code className="h-4 w-4 mt-0.5 text-blue-500" />
-                  Proper development resources
+                  <Code className="h-4 w-4 mt-0.5 text-primary" />
+                  <span className="text-base-content/70">Proper development resources</span>
                 </li>
                 <li className="text-sm flex items-start gap-2">
-                  <FileSearch className="h-4 w-4 mt-0.5 text-blue-500" />
-                  Regular testing and validation
+                  <FileSearch className="h-4 w-4 mt-0.5 text-primary" />
+                  <span className="text-base-content/70">Regular testing and validation</span>
                 </li>
                 <li className="text-sm flex items-start gap-2">
-                  <Settings className="h-4 w-4 mt-0.5 text-blue-500" />
-                  Clear governance model
+                  <Settings className="h-4 w-4 mt-0.5 text-primary" />
+                  <span className="text-base-content/70">Clear governance model</span>
                 </li>
               </ul>
             </div>

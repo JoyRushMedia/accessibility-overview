@@ -115,16 +115,12 @@ const ComplianceRiskTracker = () => {
   ];
 
   const getLikelihoodColor = (value: number): string => {
-    if (value >= 0.7) return 'bg-red-500';
-    if (value >= 0.4) return 'bg-yellow-500';
-    return 'bg-green-500';
+    if (value >= 0.7) return 'bg-error/10 text-error';
+    if (value >= 0.4) return 'bg-warning/10 text-warning';
+    return 'bg-success/10 text-success';
   };
 
-  const getImpactColor = (value: number): string => {
-    if (value >= 0.7) return 'bg-red-500';
-    if (value >= 0.4) return 'bg-yellow-500';
-    return 'bg-green-500';
-  };
+  const getImpactColor = getLikelihoodColor;
 
   const getLikelihoodValue = (value: string): number => {
     return value === "High" ? 0.8 : value === "Medium" ? 0.5 : 0.2;
@@ -137,52 +133,52 @@ const ComplianceRiskTracker = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Gauge className="h-6 w-6 text-blue-500" />
+            <Gauge className="h-6 w-6 text-primary" />
             WCAG Compliance Progress Tracker
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
             {complianceAreas.map((area, index) => (
-              <div key={index} className="border rounded-lg p-4">
+              <div key={index} className="border border-base-300 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bold text-lg">{area.name}</h3>
+                  <h3 className="font-bold text-lg text-base-content">{area.name}</h3>
                   <div className="flex items-center gap-4">
-                    <span className="text-sm text-gray-500">Total Requirements: {area.requirements}</span>
+                    <span className="text-sm text-base-content/60">Total Requirements: {area.requirements}</span>
                     <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-5 w-5 text-red-500" />
-                      <span className="text-sm text-red-500">{area.criticalIssues} Critical Issues</span>
+                      <AlertTriangle className="h-5 w-5 text-error" />
+                      <span className="text-sm text-error">{area.criticalIssues} Critical Issues</span>
                     </div>
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-4 bg-base-200 rounded-full overflow-hidden">
                       <div 
-                        className={`progress-bar bg-blue-500`}
+                        className="progress-bar bg-primary"
                         style={{ width: `${Math.round((area.completed / area.requirements) * 100)}%` }}
                       />
                     </div>
                     <div className="mt-2 flex justify-between text-sm">
                       <div className="flex items-center gap-1">
-                        <CheckCircle2 className="h-4 w-4 text-green-500" />
-                        <span>Completed: {area.completed}</span>
+                        <CheckCircle2 className="h-4 w-4 text-success" />
+                        <span className="text-base-content">Completed: {area.completed}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Timer className="h-4 w-4 text-yellow-500" />
-                        <span>In Progress: {area.inProgress}</span>
+                        <Timer className="h-4 w-4 text-warning" />
+                        <span className="text-base-content">In Progress: {area.inProgress}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <AlertCircle className="h-4 w-4 text-gray-400" />
-                        <span>Not Started: {area.notStarted}</span>
+                        <AlertCircle className="h-4 w-4 text-base-content/40" />
+                        <span className="text-base-content">Not Started: {area.notStarted}</span>
                       </div>
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold mb-2">Key Areas:</h4>
+                    <h4 className="text-sm font-semibold mb-2 text-base-content">Key Areas:</h4>
                     <div className="flex flex-wrap gap-2">
                       {area.keyAreas.map((keyArea, i) => (
-                        <span key={i} className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">
+                        <span key={i} className="px-2 py-1 bg-primary/10 text-primary rounded text-sm">
                           {keyArea}
                         </span>
                       ))}
@@ -198,17 +194,17 @@ const ComplianceRiskTracker = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <AlertTriangle className="h-6 w-6 text-orange-500" />
+            <AlertTriangle className="h-6 w-6 text-warning" />
             Risk Assessment Matrix
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {riskMatrix.map((risk, index) => (
-              <div key={index} className="border rounded-lg p-4">
+              <div key={index} className="border border-base-300 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-4">
-                    <span className="font-bold">{risk.risk}</span>
+                    <span className="font-bold text-base-content">{risk.risk}</span>
                     <div className="flex items-center gap-2">
                       <span className={`px-2 py-1 rounded text-sm ${getLikelihoodColor(getLikelihoodValue(risk.likelihood))}`}>
                         Likelihood: {risk.likelihood}
@@ -218,14 +214,16 @@ const ComplianceRiskTracker = () => {
                       </span>
                     </div>
                   </div>
-                  <span className="text-sm text-gray-500">Priority {risk.priority}</span>
+                  <span className="text-sm text-base-content/60">Priority {risk.priority}</span>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="font-semibold">Affected Users:</span> {risk.affected}
+                    <span className="font-semibold text-base-content">Affected Users:</span>
+                    <span className="text-base-content/70"> {risk.affected}</span>
                   </div>
                   <div>
-                    <span className="font-semibold">Mitigation:</span> {risk.mitigation}
+                    <span className="font-semibold text-base-content">Mitigation:</span>
+                    <span className="text-base-content/70"> {risk.mitigation}</span>
                   </div>
                 </div>
               </div>

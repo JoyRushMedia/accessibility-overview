@@ -1,16 +1,31 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Keyboard, CheckCircle2, RotateCcw } from 'lucide-react'
+import ExerciseLayout from './components/ExerciseLayout'
 import { motion } from 'framer-motion'
-import AnimatedButton from '../../../app/components/AnimatedButton'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export default function KeyboardNavExercise() {
   const [completedSteps, setCompletedSteps] = useState<number[]>([])
   const [inputValue, setInputValue] = useState('')
   const [selectedOption, setSelectedOption] = useState('')
 
+  const totalSteps = 5
+  const progress = (completedSteps.length / totalSteps) * 100
+
   const completeStep = (step: number) => {
     if (!completedSteps.includes(step)) {
-      setCompletedSteps([...completedSteps, step])
+      setCompletedSteps([...completedSteps, step].sort((a, b) => a - b))
     }
   }
 
@@ -21,98 +36,144 @@ export default function KeyboardNavExercise() {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="space-y-4"
+    <ExerciseLayout
+      icon={Keyboard}
+      title="Keyboard Navigation Practice"
+      description="Complete these tasks using only your keyboard"
+      iconColor="bg-amber-100 text-amber-700"
     >
-      <h3 className="text-xl font-bold">Keyboard Navigation Exercise</h3>
-      <p className="text-gray-600 dark:text-gray-300">Use only your keyboard to complete these tasks:</p>
-      
-      <div className="space-y-2">
-        <button 
-          onClick={() => completeStep(1)}
-          className={`block w-full text-left p-2 rounded border ${
-            completedSteps.includes(1) 
-              ? 'bg-green-50 dark:bg-green-900/50 border-green-500' 
-              : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-          }`}
-        >
-          1. Click this button {completedSteps.includes(1) && '✓'}
-        </button>
+      <div className="space-y-8">
+        <div className="flex items-center gap-4">
+          <Progress value={progress} className="flex-1" />
+          <span className="text-sm font-medium">
+            {completedSteps.length}/{totalSteps} completed
+          </span>
+        </div>
 
-        <a 
-          href="#"
-          onClick={(e) => {
-            e.preventDefault()
-            completeStep(2)
-          }}
-          className={`block w-full text-left p-2 rounded border ${
-            completedSteps.includes(2) 
-              ? 'bg-green-50 dark:bg-green-900/50 border-green-500' 
-              : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-          }`}
-        >
-          2. Follow this link {completedSteps.includes(2) && '✓'}
-        </a>
+        <div className="grid gap-4">
+          <motion.div
+            className={`p-4 rounded-lg border transition-colors ${
+              completedSteps.includes(1)
+                ? 'bg-green-50 border-green-200'
+                : 'hover:bg-muted/50'
+            }`}
+          >
+            <Button
+              onClick={() => completeStep(1)}
+              variant={completedSteps.includes(1) ? "outline" : "default"}
+              className="w-full justify-start"
+            >
+              <CheckCircle2 className={`w-4 h-4 mr-2 ${
+                completedSteps.includes(1) ? 'text-green-500' : ''
+              }`} />
+              Click this button using Space or Enter
+            </Button>
+          </motion.div>
 
-        <input 
-          type="text"
-          value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value)
-            if (e.target.value.length > 0) completeStep(3)
-          }}
-          placeholder="3. Type your name"
-          className={`block w-full p-2 border rounded ${
-            completedSteps.includes(3) 
-              ? 'bg-green-50 dark:bg-green-900/50 border-green-500' 
-              : 'bg-white dark:bg-gray-800'
-          }`}
-        />
+          <motion.div
+            className={`p-4 rounded-lg border transition-colors ${
+              completedSteps.includes(2)
+                ? 'bg-green-50 border-green-200'
+                : 'hover:bg-muted/50'
+            }`}
+          >
+            <div className="space-y-2">
+              <Label>Type something and press Enter</Label>
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && inputValue) {
+                    completeStep(2)
+                  }
+                }}
+                placeholder="Type here..."
+              />
+            </div>
+          </motion.div>
 
-        <select 
-          value={selectedOption}
-          onChange={(e) => {
-            setSelectedOption(e.target.value)
-            if (e.target.value) completeStep(4)
-          }}
-          aria-label="Select an option"
-          className={`block w-full p-2 border rounded ${
-            completedSteps.includes(4) 
-              ? 'bg-green-50 dark:bg-green-900/50 border-green-500' 
-              : 'bg-white dark:bg-gray-800'
-          }`}
-        >
-          <option value="">4. Select an option</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-        </select>
+          <motion.div
+            className={`p-4 rounded-lg border transition-colors ${
+              completedSteps.includes(3)
+                ? 'bg-green-50 border-green-200'
+                : 'hover:bg-muted/50'
+            }`}
+          >
+            <div className="space-y-2">
+              <Label>Use arrow keys to select an option</Label>
+              <Select
+                value={selectedOption}
+                onValueChange={(value) => {
+                  setSelectedOption(value)
+                  completeStep(3)
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="option1">Option 1</SelectItem>
+                  <SelectItem value="option2">Option 2</SelectItem>
+                  <SelectItem value="option3">Option 3</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className={`p-4 rounded-lg border transition-colors ${
+              completedSteps.includes(4)
+                ? 'bg-green-50 border-green-200'
+                : 'hover:bg-muted/50'
+            }`}
+          >
+            <Button
+              variant="link"
+              onClick={() => completeStep(4)}
+              className="text-blue-500 hover:text-blue-600"
+            >
+              Tab to and activate this link
+              {completedSteps.includes(4) && 
+                <CheckCircle2 className="w-4 h-4 ml-2 text-green-500" />
+              }
+            </Button>
+          </motion.div>
+
+          <motion.div
+            className={`p-4 rounded-lg border transition-colors ${
+              completedSteps.includes(5)
+                ? 'bg-green-50 border-green-200'
+                : 'hover:bg-muted/50'
+            }`}
+          >
+            <div className="flex justify-between items-center">
+              <span>Reset the exercise</span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  resetExercise()
+                  completeStep(5)
+                }}
+              >
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Reset
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+
+        {completedSteps.length === totalSteps && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-4 rounded-lg bg-green-100 text-green-800 border border-green-200"
+          >
+            <h3 className="font-semibold mb-1">🎉 Congratulations!</h3>
+            <p>You&apos;ve successfully completed all keyboard navigation tasks.</p>
+          </motion.div>
+        )}
       </div>
-
-      <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/50 rounded">
-        <h4 className="font-bold mb-2">Keyboard Tips:</h4>
-        <ul className="list-disc list-inside space-y-1">
-          <li>Use Tab to move between elements</li>
-          <li>Use Enter or Space to activate buttons</li>
-          <li>Use Arrow keys for select dropdowns</li>
-          <li>Use Enter to follow links</li>
-        </ul>
-      </div>
-
-      {completedSteps.length === 4 && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-4 bg-green-50 dark:bg-green-900/50 rounded"
-        >
-          🎉 Congratulations! You&apos;ve completed all tasks using keyboard navigation!
-        </motion.div>
-      )}
-
-      <AnimatedButton variant="secondary" onClick={resetExercise}>
-        Reset Exercise
-      </AnimatedButton>
-    </motion.div>
+    </ExerciseLayout>
   )
 } 

@@ -5,9 +5,8 @@ import { BookOpen, FileText, Users, ShoppingBag, TrendingUp, Briefcase, TestTube
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuItem } from "./ui/sidebar"
-// End of Selection
 import { NavigationData } from "../types/navigation"
-import { ThemeToggle } from './ThemeToggle'
+import { ThemeController } from './ThemeController'
 
 const navigationData: NavigationData = {
   navMain: [
@@ -68,29 +67,43 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <Sidebar>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem className="px-2 py-1">
-            <ThemeToggle variant="sidebar" />
-          </SidebarMenuItem>
-        </SidebarMenu>
+    <Sidebar className="border-r border-base-300 bg-base-100">
+      <SidebarHeader className="p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-base-content">
+            A11y Dashboard
+          </h2>
+        </div>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup title="Main">
-          {navigationData.navMain.map((item) => (
-            <SidebarMenuItem 
-              key={item.url} 
-              className={pathname === item.url ? 'active' : ''}
-            >
-              <Link href={item.url} className="flex items-center gap-2">
-                <item.icon className="h-5 w-5" />
-                {item.title}
-              </Link>
-            </SidebarMenuItem>
-          ))}
+        <SidebarGroup>
+          <SidebarMenu>
+            {navigationData.navMain.map((item) => (
+              <SidebarMenuItem key={item.url}>
+                <Link
+                  href={item.url}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-200
+                    ${pathname === item.url 
+                      ? 'bg-primary/10 text-primary' 
+                      : 'text-base-content hover:bg-base-200'
+                    }`}
+                >
+                  <item.icon className={`h-5 w-5 ${
+                    pathname === item.url
+                      ? 'text-primary'
+                      : 'text-base-content/70'
+                  }`} />
+                  <span className="font-medium">{item.title}</span>
+                </Link>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      
+      <div className="mt-auto p-4 border-t border-base-300">
+        <ThemeController />
+      </div>
     </Sidebar>
   )
 }

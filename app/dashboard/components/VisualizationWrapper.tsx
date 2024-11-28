@@ -82,32 +82,32 @@ interface VisualizationWrapperProps {
 }
 
 const VisualizationWrapper: React.FC<VisualizationWrapperProps> = ({ visualizationId, children }) => {
-  const info = visualizationInfo[visualizationId as keyof typeof visualizationInfo];
+  const info = visualizationInfo[visualizationId];
 
   if (!info) return children;
 
   return (
     <div className="space-y-6">
-      <Card className="bg-blue-50/80 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900">
+      <Card className="bg-base-200 border border-base-300">
         <CardContent className="pt-6">
           <div className="flex items-start gap-4">
-            <Info className="h-6 w-6 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1" />
+            <Info className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
             <div>
-              <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-gray-100">{info.title}</h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-4">{info.description}</p>
+              <h2 className="text-xl font-bold mb-3 text-base-content">{info.title}</h2>
+              <p className="text-base-content/70 mb-4">{info.description}</p>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="font-semibold mb-2 text-sm text-blue-700 dark:text-blue-400">Key Points:</h3>
+                  <h3 className="font-semibold mb-2 text-sm text-primary">Key Points:</h3>
                   <ul className="space-y-1">
                     {info.keyPoints.map((point, index) => (
-                      <li key={index} className="text-sm text-gray-600 dark:text-gray-400">• {point}</li>
+                      <li key={index} className="text-sm text-base-content/70">• {point}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2 text-sm text-blue-700 dark:text-blue-400">Target Audience:</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{info.audience}</p>
+                  <h3 className="font-semibold mb-2 text-sm text-primary">Target Audience:</h3>
+                  <p className="text-sm text-base-content/70">{info.audience}</p>
                 </div>
               </div>
             </div>

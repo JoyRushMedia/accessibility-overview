@@ -2,14 +2,15 @@
 
 import { motion } from 'framer-motion'
 import { Code, Image, Keyboard } from 'lucide-react'
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 import Link from 'next/link'
+import { cloneElement } from 'react'
+import { ThemeController } from '@/components/ThemeController'
 
 interface Exercise {
   id: number
   title: string
   description: string
-  icon: React.ReactNode
+  icon: React.ReactElement
   href: string
   difficulty: string
   duration: string
@@ -21,8 +22,8 @@ export default function PracticePage() {
       id: 1,
       title: "Color Contrast Tool",
       description: "Try out different color combinations and check if they meet accessibility standards in real-time",
-      icon: <Code className="h-6 w-6 text-indigo-500" />,
-      href: "/practice/color-contrast",
+      icon: <Code className="h-6 w-6" />,
+      href: "/practice/exercises/color-contrast",
       difficulty: "Quick test",
       duration: "Interactive"
     },
@@ -30,8 +31,8 @@ export default function PracticePage() {
       id: 2,
       title: "Alt Text Generator",
       description: "Upload images and practice writing descriptive alt text with instant feedback",
-      icon: <Image className="h-6 w-6 text-emerald-500" />,
-      href: "/practice/alt-text",
+      icon: <Image className="h-6 w-6" />,
+      href: "/practice/exercises/alt-text",
       difficulty: "Sandbox",
       duration: "Interactive"
     },
@@ -39,8 +40,8 @@ export default function PracticePage() {
       id: 3,
       title: "Keyboard Navigation Tester",
       description: "Interactive playground to test and validate keyboard navigation patterns",
-      icon: <Keyboard className="h-6 w-6 text-amber-500" />,
-      href: "/practice/keyboard-nav",
+      icon: <Keyboard className="h-6 w-6" />,
+      href: "/practice/exercises/keyboard-nav",
       difficulty: "Testing tool",
       duration: "Interactive"
     }
@@ -50,35 +51,74 @@ export default function PracticePage() {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="space-y-6 min-h-screen pb-8"
+      className="min-h-screen bg-base-100"
     >
-      <div>
-        <h1 className="text-3xl font-bold">Accessibility Playground</h1>
-        <p className="text-muted-foreground mt-2">
-          Interactive tools to test and validate your accessibility implementations
-        </p>
-      </div>
+      <div className="container mx-auto p-8">
+        <div className="flex justify-between items-center mb-12">
+          <div>
+            <h1 className="text-4xl font-bold text-base-content">
+              Interactive Accessibility Tools
+            </h1>
+            <p className="text-xl text-base-content/60 mt-2">
+              Hands-on tools to build more accessible web experiences
+            </p>
+          </div>
+          <ThemeController />
+        </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
-        {exercises.map((exercise) => (
-          <Link href={exercise.href} key={exercise.id} className="h-full">
-            <Card className="h-full hover:shadow-lg transition-all duration-200 flex flex-col">
-              <CardHeader className="flex-1">
-                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
-                  {exercise.icon}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {exercises.map((exercise) => (
+            <Link 
+              href={exercise.href} 
+              key={exercise.id} 
+              className="group"
+            >
+              <div className="card bg-base-200 hover:bg-base-300 transition-all duration-300 
+                             border border-base-300 h-full overflow-hidden">
+                <div className="card-body">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center 
+                                justify-center mb-4 group-hover:scale-110 transition-transform">
+                    {cloneElement(exercise.icon, { 
+                      className: 'w-7 h-7 text-primary' 
+                    })}
+                  </div>
+                  
+                  <h2 className="card-title text-xl mb-2 text-base-content group-hover:text-primary transition-colors">
+                    {exercise.title}
+                  </h2>
+                  <p className="text-base-content/70 mb-6 line-clamp-2">
+                    {exercise.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between mt-auto">
+                    <div className="badge badge-outline text-base-content border-base-content/20">
+                      {exercise.difficulty}
+                    </div>
+                    <div className="badge badge-primary">
+                      {exercise.duration}
+                    </div>
+                  </div>
                 </div>
-                <CardTitle>{exercise.title}</CardTitle>
-                <CardDescription>{exercise.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>{exercise.difficulty}</span>
-                  <span>{exercise.duration}</span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <div className="stats shadow inline-flex">
+            <div className="stat place-items-center">
+              <div className="stat-title">Exercises</div>
+              <div className="stat-value text-primary">{exercises.length}</div>
+              <div className="stat-desc">Available to try</div>
+            </div>
+            
+            <div className="stat place-items-center">
+              <div className="stat-title">Interactive</div>
+              <div className="stat-value">100%</div>
+              <div className="stat-desc">Real-time feedback</div>
+            </div>
+          </div>
+        </div>
       </div>
     </motion.div>
   )

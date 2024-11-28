@@ -1,145 +1,146 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Paintbrush, RefreshCw } from 'lucide-react'
+import ExerciseLayout from './components/ExerciseLayout'
 import { motion } from 'framer-motion'
-import { Paintbrush, Check, AlertTriangle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 export default function ColorContrastExercise() {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF')
   const [textColor, setTextColor] = useState('#000000')
-  const [result, setResult] = useState<string | null>(null)
-  const [ratio, setRatio] = useState<number | null>(null)
+  const [result, setResult] = useState<{
+    ratio: number;
+    passes: boolean;
+  } | null>(null)
+
+  // HSL color: hsl(82, 84.5%, 67.1%)
+  const buttonBgColor = "hsl(82, 84.5%, 67.1%)"
+  const buttonTextColor = "#000000" // Ensuring good contrast with the background
 
   const checkContrast = () => {
     const l1 = getLuminance(backgroundColor)
     const l2 = getLuminance(textColor)
     const contrastRatio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)
-    setRatio(contrastRatio)
-    
-    setResult(
-      contrastRatio >= 4.5 
-        ? "success"
-        : "failure"
-    )
+    setResult({
+      ratio: contrastRatio,
+      passes: contrastRatio >= 4.5
+    })
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="space-y-6 bg-background text-foreground"
+    <ExerciseLayout
+      icon={Paintbrush}
+      title="Color Contrast Checker"
+      description="Test color combinations against WCAG 2.1 contrast requirements"
+      iconColor="bg-indigo-100 text-indigo-700"
     >
-      <div className="flex items-center gap-3 mb-6">
-        <div className="badge badge-lg bg-muted text-muted-foreground p-3">
-          <Paintbrush className="w-6 h-6 text-primary" />
-        </div>
-        <div>
-          <h3 className="text-2xl font-bold text-foreground">
-            Color Contrast Checker
-          </h3>
-          <p className="text-muted-foreground">
-            Test your color combinations against WCAG standards
-          </p>
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <div className="card bg-background border border-border">
-            <div className="card-body space-y-3">
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="text-foreground">Background Color</span>
-                </div>
-                <div className="join">
-                  <input
+      <div className="grid lg:grid-cols-2 gap-12">
+        <div className="space-y-8">
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <Label className="text-lg">Background Color</Label>
+              <div className="flex gap-3">
+                <div className="relative">
+                  <Input
                     type="color"
                     value={backgroundColor}
                     onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="join-item w-14 h-12 rounded-l-lg border-border"
-                  />
-                  <input 
-                    type="text"
-                    value={backgroundColor.toUpperCase()}
-                    onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="join-item input bg-background text-foreground border-border w-full"
+                    className="w-20 h-20 rounded-2xl cursor-pointer border-2 p-1"
                   />
                 </div>
-              </label>
-              
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Text Color</span>
-                </div>
-                <div className="join">
-                  <input
+                <Input
+                  type="text"
+                  value={backgroundColor.toUpperCase()}
+                  onChange={(e) => setBackgroundColor(e.target.value)}
+                  className="text-lg font-mono rounded-xl"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <Label className="text-lg">Text Color</Label>
+              <div className="flex gap-3">
+                <div className="relative">
+                  <Input
                     type="color"
                     value={textColor}
                     onChange={(e) => setTextColor(e.target.value)}
-                    className="join-item w-14 h-12 rounded-l-lg border-r-0"
-                  />
-                  <input 
-                    type="text"
-                    value={textColor.toUpperCase()}
-                    onChange={(e) => setTextColor(e.target.value)}
-                    className="join-item input input-bordered w-full"
+                    className="w-20 h-20 rounded-2xl cursor-pointer border-2 p-1"
                   />
                 </div>
-              </label>
+                <Input
+                  type="text"
+                  value={textColor.toUpperCase()}
+                  onChange={(e) => setTextColor(e.target.value)}
+                  className="text-lg font-mono rounded-xl"
+                />
+              </div>
             </div>
           </div>
 
-          <button 
-            onClick={checkContrast}
-            className="w-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-md transition-colors"
-          >
-            Check Contrast
-          </button>
+          <div className="flex gap-3">
+            <Button 
+              onClick={checkContrast}
+              className="flex-1 text-lg h-12 rounded-full font-medium"
+              style={{
+                backgroundColor: buttonBgColor,
+                color: buttonTextColor,
+              }}
+            >
+              Check Contrast
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-12 w-12 rounded-full"
+              onClick={() => {
+                setBackgroundColor('#FFFFFF')
+                setTextColor('#000000')
+                setResult(null)
+              }}
+            >
+              <RefreshCw className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
 
-        <div className="space-y-4">
-          <div 
-            className="card h-40 flex items-center justify-center text-2xl font-medium transition-colors"
+        <div className="space-y-8">
+          <motion.div 
+            className="rounded-2xl h-64 flex items-center justify-center text-3xl font-medium shadow-lg"
             style={{ 
-              '--dynamic-bg': backgroundColor, 
-              '--dynamic-text': textColor 
-            } as React.CSSProperties}
+              backgroundColor,
+              color: textColor
+            }}
           >
-            <div className="card-body items-center justify-center" style={{ backgroundColor: 'var(--dynamic-bg)', color: 'var(--dynamic-text)' }}>
-              Preview Text
-            </div>
-          </div>
+            Preview Text
+          </motion.div>
 
           {result && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`alert ${
-                result === "success" 
-                  ? "alert-success"
-                  : "alert-error"
+              className={`p-6 rounded-2xl border-2 ${
+                result.passes 
+                  ? 'bg-success/10 border-success/20 text-success-content'
+                  : 'bg-error/10 border-error/20 text-error-content'
               }`}
             >
-              {result === "success" ? (
-                <Check className="w-5 h-5" />
-              ) : (
-                <AlertTriangle className="w-5 h-5" />
-              )}
-              <div>
-                <h4 className="font-bold">
-                  {result === "success" 
-                    ? "Passes WCAG AA standard!" 
-                    : "Fails WCAG AA standard"}
-                </h4>
-                <p className="text-sm">
-                  Contrast ratio: {ratio?.toFixed(2)}:1 
+              <h3 className="text-xl font-semibold mb-2">
+                {result.passes ? 'Passes WCAG AA' : 'Fails WCAG AA'}
+              </h3>
+              <p className="text-lg opacity-90">
+                Contrast ratio: {result.ratio.toFixed(2)}:1
+                <span className="opacity-75 ml-2">
                   (minimum required: 4.5:1)
-                </p>
-              </div>
+                </span>
+              </p>
             </motion.div>
           )}
         </div>
       </div>
-    </motion.div>
+    </ExerciseLayout>
   )
 }
 

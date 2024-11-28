@@ -203,37 +203,37 @@ const BusinessImpact = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Scale className="h-6 w-6 text-blue-500" />
+            <Scale className="h-6 w-6 text-primary" />
             Financial Impact Analysis
           </CardTitle>
         </CardHeader>
         <CardContent>
           {financialImpact.map((section, index) => (
             <div key={index} className="grid md:grid-cols-2 gap-4">
-              <div className="border rounded-lg p-4">
-                <h3 className="font-bold mb-4">{section.current.title}</h3>
+              <div className="border border-base-300 rounded-lg p-4">
+                <h3 className="font-bold mb-4 text-base-content">{section.current.title}</h3>
                 <div className="space-y-4">
                   {section.current.items.map((item, i) => (
-                    <div key={i} className="bg-red-50 rounded-lg p-3">
+                    <div key={i} className="bg-error/10 rounded-lg p-3">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-semibold text-red-700">{item.impact}</span>
-                        <span className="text-red-700">{item.cost}</span>
+                        <span className="font-semibold text-error">{item.impact}</span>
+                        <span className="text-error">{item.cost}</span>
                       </div>
-                      <p className="text-sm text-gray-600">{item.description}</p>
+                      <p className="text-sm text-base-content/70">{item.description}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="border rounded-lg p-4">
-                <h3 className="font-bold mb-4">{section.prevention.title}</h3>
+              <div className="border border-base-300 rounded-lg p-4">
+                <h3 className="font-bold mb-4 text-base-content">{section.prevention.title}</h3>
                 <div className="space-y-4">
                   {section.prevention.items.map((item, i) => (
-                    <div key={i} className="bg-green-50 rounded-lg p-3">
+                    <div key={i} className="bg-success/10 rounded-lg p-3">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-semibold text-green-700">{item.benefit}</span>
-                        <span className="text-green-700">{item.value}</span>
+                        <span className="font-semibold text-success">{item.benefit}</span>
+                        <span className="text-success">{item.value}</span>
                       </div>
-                      <p className="text-sm text-gray-600">{item.description}</p>
+                      <p className="text-sm text-base-content/70">{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -246,24 +246,24 @@ const BusinessImpact = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Users className="h-6 w-6 text-blue-500" />
+            <Users className="h-6 w-6 text-primary" />
             Market Impact Analysis
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
             {marketImpact.segments.map((segment, index) => (
-              <div key={index} className="border rounded-lg p-4">
+              <div key={index} className="border border-base-300 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-bold">{segment.title}</h3>
-                  <span className="text-blue-600 font-semibold">{segment.size}</span>
+                  <h3 className="font-bold text-base-content">{segment.title}</h3>
+                  <span className="text-primary font-semibold">{segment.size}</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-2">{segment.spending}</p>
-                <p className="text-sm font-medium mb-2">{segment.impact}</p>
+                <p className="text-sm text-base-content/70 mb-2">{segment.spending}</p>
+                <p className="text-sm font-medium mb-2 text-base-content">{segment.impact}</p>
                 <ul className="space-y-1">
                   {segment.requirements.map((req, i) => (
-                    <li key={i} className="text-sm flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 mt-0.5 text-green-500 flex-shrink-0" />
+                    <li key={i} className="text-sm flex items-start gap-2 text-base-content/70">
+                      <CheckCircle2 className="h-4 w-4 mt-0.5 text-success flex-shrink-0" />
                       {req}
                     </li>
                   ))}
@@ -277,19 +277,19 @@ const BusinessImpact = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="h-6 w-6 text-blue-500" />
+            <TrendingUp className="h-6 w-6 text-primary" />
             Competitive Advantages
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-4 gap-4">
             {competitiveAdvantages.map((section, index) => (
-              <div key={index} className="border rounded-lg p-4">
-                <h3 className="font-bold mb-3">{section.category}</h3>
+              <div key={index} className="border border-base-300 rounded-lg p-4">
+                <h3 className="font-bold mb-3 text-base-content">{section.category}</h3>
                 <ul className="space-y-2">
                   {section.advantages.map((advantage, i) => (
-                    <li key={i} className="text-sm flex items-start gap-2">
-                      <Award className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
+                    <li key={i} className="text-sm flex items-start gap-2 text-base-content/70">
+                      <Award className="h-4 w-4 mt-0.5 text-primary flex-shrink-0" />
                       {advantage}
                     </li>
                   ))}
@@ -303,7 +303,7 @@ const BusinessImpact = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BarChart className="h-6 w-6 text-blue-500" />
+            <BarChart className="h-6 w-6 text-primary" />
             Implementation ROI
           </CardTitle>
         </CardHeader>

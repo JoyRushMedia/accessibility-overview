@@ -454,7 +454,7 @@ const WCAGHeatmap = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Users className="h-6 w-6 text-blue-500" />
+            <Users className="h-6 w-6 text-primary" />
             Role Responsibilities
           </CardTitle>
           <CardDescription>Overview of key responsibilities for each role in implementing WCAG guidelines</CardDescription>
@@ -462,19 +462,19 @@ const WCAGHeatmap = () => {
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6">
             {Object.entries(roleDefinitions).map(([code, info]) => (
-              <div key={code} className="border rounded-lg p-4 dark:border-gray-700 dark:bg-gray-800">
+              <div key={code} className="border rounded-lg p-4 border-base-300 bg-base-100">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2 py-1 rounded-full text-sm bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
+                  <span className="px-2 py-1 rounded-full text-sm bg-primary text-primary-content">
                     {code}
                   </span>
-                  <h3 className="font-bold text-lg dark:text-white">{info.label}</h3>
+                  <h3 className="font-bold text-lg text-base-content">{info.label}</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-3">{info.description}</p>
-                <div className="bg-gray-50 dark:bg-gray-700 rounded p-3">
-                  <h4 className="font-semibold mb-2 text-sm dark:text-gray-100">Key Responsibilities:</h4>
+                <p className="text-base-content/70 mb-3">{info.description}</p>
+                <div className="bg-base-200 rounded p-3">
+                  <h4 className="font-semibold mb-2 text-sm text-base-content">Key Responsibilities:</h4>
                   <ul className="grid grid-cols-2 gap-2">
                     {info.examples.map((example, i) => (
-                      <li key={i} className="text-sm flex items-start gap-2 dark:text-gray-300">
+                      <li key={i} className="text-sm flex items-start gap-2 text-base-content/70">
                         <CheckCircle2 className={`h-4 w-4 mt-0.5 ${getCheckmarkStyle(true)} flex-shrink-0`} />
                         {example}
                       </li>
@@ -491,7 +491,7 @@ const WCAGHeatmap = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Info className="h-6 w-6 text-blue-500" />
+            <Info className="h-6 w-6 text-primary" />
             WCAG Requirements Distribution
           </CardTitle>
           <CardDescription>Distribution of WCAG success criteria across different roles and conformance levels</CardDescription>
@@ -502,15 +502,15 @@ const WCAGHeatmap = () => {
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
-                    <th className="p-3 border-b dark:border-gray-700 font-semibold text-left dark:text-gray-200">Criterion</th>
-                    <th className="p-3 border-b dark:border-gray-700 font-semibold text-left dark:text-gray-200">Level</th>
+                    <th className="p-3 border-b border-base-300 font-semibold text-left text-base-content">Criterion</th>
+                    <th className="p-3 border-b border-base-300 font-semibold text-left text-base-content">Level</th>
                     {Object.entries(roleDefinitions).map(([code, info]) => (
-                      <th key={code} className="p-3 border-b dark:border-gray-700 font-semibold text-center">
+                      <th key={code} className="p-3 border-b border-base-300 font-semibold text-center">
                         <div className="flex flex-col items-center">
-                          <span className="px-2 py-1 rounded-full text-sm bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
+                          <span className="px-2 py-1 rounded-full text-sm bg-primary text-primary-content">
                             {code}
                           </span>
-                          <span className="text-xs mt-1 dark:text-gray-300">{info.label}</span>
+                          <span className="text-xs mt-1 text-base-content/70">{info.label}</span>
                         </div>
                       </th>
                     ))}
@@ -520,15 +520,15 @@ const WCAGHeatmap = () => {
                   {wcagData.map((item, idx) => (
                     <tr 
                       key={idx} 
-                      className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                      className="hover:bg-base-200 transition-colors"
                     >
-                      <td className="p-3 border-b border-r dark:border-gray-700 font-medium dark:text-gray-200">
+                      <td className="p-3 border-b border-r border-base-300 font-medium text-base-content">
                         <Tooltip.Root>
                           <Tooltip.Trigger asChild>
                             <div className="cursor-help">
                               {item.criterion}
                               {wcagDescriptions[item.criterion] && (
-                                <div className="text-xs text-gray-500 dark:text-gray-400">
+                                <div className="text-xs text-base-content/70">
                                   {wcagDescriptions[item.criterion].title}
                                 </div>
                               )}
@@ -536,29 +536,29 @@ const WCAGHeatmap = () => {
                           </Tooltip.Trigger>
                           <Tooltip.Portal>
                             <Tooltip.Content
-                              className="bg-white dark:bg-gray-800 px-4 py-3 rounded-lg shadow-lg border dark:border-gray-700 max-w-xs z-50"
+                              className="bg-base-200 px-4 py-3 rounded-lg shadow-lg border border-base-300 max-w-xs z-50"
                               sideOffset={5}
                             >
                               <div className="space-y-2">
-                                <div className="font-semibold dark:text-gray-200">
+                                <div className="font-semibold text-base-content">
                                   {wcagDescriptions[item.criterion]?.title}
                                 </div>
-                                <div className="text-sm text-gray-600 dark:text-gray-300">
+                                <div className="text-sm text-base-content/70">
                                   {wcagDescriptions[item.criterion]?.description}
                                 </div>
                               </div>
-                              <Tooltip.Arrow className="fill-white dark:fill-gray-800" />
+                              <Tooltip.Arrow className="fill-base-200" />
                             </Tooltip.Content>
                           </Tooltip.Portal>
                         </Tooltip.Root>
                       </td>
-                      <td className="p-3 border-b border-r dark:border-gray-700">
+                      <td className="p-3 border-b border-r border-base-300">
                         <span className={getLevelStyle(item.level)}>{item.level}</span>
                       </td>
                       {Object.keys(roleDefinitions).map(role => (
                         <td 
                           key={role} 
-                          className="p-3 border-b border-r dark:border-gray-700 text-center"
+                          className="p-3 border-b border-r border-base-300 text-center"
                         >
                           {item.roles.includes(role) && (
                             <CheckCircle2 className={`h-5 w-5 ${getCheckmarkStyle(true)} mx-auto`} />
